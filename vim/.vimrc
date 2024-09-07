@@ -73,3 +73,6 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 
+" Auto-open NERDTree
+au VimEnter * NERDTree
+
