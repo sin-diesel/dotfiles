@@ -15,6 +15,7 @@ fi
 export TERMINAL=gnome-terminal
 
 $HOME/gogh/installs/belafonte-day.sh
+$HOME/gogh/installs/aco.sh
 
 # fish installation
 echo " Setting up fish shell..."
