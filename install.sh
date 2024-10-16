@@ -3,6 +3,10 @@
 set -e
 set -x
 
+# detect distribution type
+distr=$(lsb_release -a | grep Description | sed -nr "s/Description:\s(.+)/\1/p") 
+echo "Launching script on: $distr"
+
 # gogh installation
 echo "Setting up terminal theme with gogh..."
 if [ -d $HOME/gogh ]; then
@@ -12,18 +16,21 @@ else
 fi
 
 # necessary in the Gnome terminal on ubuntu
-export TERMINAL=gnome-terminal
+if [[ $distr =~ "Ubuntu" ]]; then
+  export TERMINAL=gnome-terminal
+fi
 
 $HOME/gogh/installs/belafonte-day.sh
 $HOME/gogh/installs/aco.sh
 
-# fish installation
+# fish installation. Only Ubuntu is supported for now.
 echo " Setting up fish shell..."
-sudo apt install fish
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish || true
-
-fish -c "omf theme bobthefish"
-cp -r fish $HOME/.config/fish/
+if [[ $distr =~ "Ubuntu" ]]; then
+  sudo apt install fish
+  curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish || true
+  fish -c "omf theme bobthefish"
+  cp -r fish $HOME/.config/fish/
+fi
 
 # set up vim
 echo "Setting up vim..."
