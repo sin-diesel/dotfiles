@@ -8,24 +8,25 @@ distr=$(lsb_release -a | grep Description | sed -nr "s/Description:\s(.+)/\1/p")
 echo "Launching script on: $distr"
 
 # gogh installation
-echo "Setting up terminal theme with gogh..."
-if [ -d $HOME/gogh ]; then
-  echo "Found existing gogh installation at "$HOME"/gogh. Skipping repo clone..."
-else
-  git clone https://github.com/Gogh-Co/Gogh.git $HOME/gogh
-fi
-
-# necessary in the Gnome terminal on ubuntu
 if [[ $distr =~ "Ubuntu" ]]; then
-  export TERMINAL=gnome-terminal
-fi
+  echo "Setting up terminal theme with gogh..."
+  if [ -d $HOME/gogh ]; then
+    echo "Found existing gogh installation at "$HOME"/gogh. Skipping repo clone..."
+  else
+    git clone https://github.com/Gogh-Co/Gogh.git $HOME/gogh
+  fi
 
-$HOME/gogh/installs/belafonte-day.sh
-$HOME/gogh/installs/aco.sh
+  # necessary in the Gnome terminal on ubuntu
+  export TERMINAL=gnome-terminal
+  $HOME/gogh/installs/belafonte-day.sh
+  $HOME/gogh/installs/aco.sh
+
+  rm -rf $HOME/gogh
+fi
 
 # fish installation. Only Ubuntu is supported for now.
-echo " Setting up fish shell..."
 if [[ $distr =~ "Ubuntu" ]]; then
+  echo " Setting up fish shell..."
   sudo apt install fish
   curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish || true
   fish -c "omf theme bobthefish"
@@ -42,7 +43,4 @@ fi
 
 cp vim/.vimrc $HOME/.vimrc
 vim +PluginInstall +qall
-
-# cleanup
-rm -rf gogh
 
