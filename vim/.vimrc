@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'preservim/nerdtree'
+Plugin 'sheerun/vim-polyglot'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -74,5 +75,5 @@ set shiftwidth=2
 set tabstop=2
 
 " Auto-open NERDTree
-au VimEnter * NERDTree
+" au VimEnter * NERDTree
 
