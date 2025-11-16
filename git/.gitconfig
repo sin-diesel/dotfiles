@@ -1,0 +1,17 @@
+[user]
+	email = sidelnikov.si.001@gmail.com
+	name = Stanislav Sidelnikov
+[core]
+	editor = vim
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+  default = current
+[alias]
+	co = checkout
+	br = branch
+	cm = commit
+	st = status
